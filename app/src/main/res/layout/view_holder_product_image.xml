@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/product_height"
+    android:layout_marginBottom="@dimen/product_image_margin_bottom">
+
+    <ImageView
+        android:id="@+id/iv_product_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/margin_xlarge"
+        android:layout_marginStart="@dimen/margin_xlarge"
+        android:background="@color/background"
+        android:contentDescription="@string/dummy_name"
+        android:src="@drawable/dummy_product_image" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignEnd="@+id/iv_product_image"
+        android:layout_marginEnd="@dimen/margin_medium_2"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:backgroundTint="@color/colorPrimary"
+        android:drawableStart="@drawable/ic_add_black_24dp"
+        android:elevation="@dimen/margin_small"
+        android:text="@string/info"
+        android:textColor="@color/primary_text" />
+
+</RelativeLayout>
