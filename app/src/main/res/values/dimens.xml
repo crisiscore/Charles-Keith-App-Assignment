@@ -35,5 +35,6 @@
     <dimen name="product_height">400dp</dimen>
     <dimen name="product_image_margin_bottom">16dp</dimen>
     <dimen name="margin_colour">150dp</dimen>
+    <dimen name="retry_image_size">100dp</dimen>
 
 </resources>

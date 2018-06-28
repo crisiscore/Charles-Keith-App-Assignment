@@ -3,11 +3,12 @@
     <string name="new_in">NEW IN</string>
 
     <!-- dummy data -->
-    <string name="dummy_count">122 ITEMS</string>
+    <string name="dummy_count">ITEMS</string>
     <string name="dummy_name">Pointed Flat Mules</string>
     <string name="dummy_new">NEW</string>
     <string name="info">INFO</string>
     <string name="related_label">you may also like</string>
     <string name="colours">Colours</string>
     <string name="dummy_color">White</string>
+    <string name="retry_connection">Please check your internet connection…</string>
 </resources>
