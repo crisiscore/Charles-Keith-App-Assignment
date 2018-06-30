@@ -11,4 +11,5 @@
     <string name="colours">Colours</string>
     <string name="dummy_color">White</string>
     <string name="retry_connection">Please check your internet connection…</string>
+    <string name="sort_by">Sort By</string>
 </resources>

@@ -3,12 +3,12 @@ package xyz.imei.charleskeithapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +18,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import xyz.imei.charleskeithapp.R;
 import xyz.imei.charleskeithapp.adapters.ProductAdapter;
 import xyz.imei.charleskeithapp.data.models.CKModel;
@@ -29,18 +30,28 @@ import xyz.imei.charleskeithapp.events.SuccessRefreshNewProductsEvent;
 import xyz.imei.charleskeithapp.utils.CharlesKeithConstants;
 import xyz.imei.charleskeithapp.viewpods.RetryViewPod;
 
-public class MainActivity extends AppCompatActivity implements ProductDelegate {
+public class MainActivity extends BaseActivity implements ProductDelegate {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.rv_new_in)
+    @BindView(R.id.rv_new_in_two_col)
     RecyclerView rvNewIn;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.vp_retry)RetryViewPod vpRetry;
-    @BindView(R.id.tv_item_count)TextView tvItemCount;
+    @BindView(R.id.vp_retry)
+    RetryViewPod vpRetry;
+    @BindView(R.id.tv_item_count)
+    TextView tvItemCount;
+    @BindView(R.id.tv_sort_by)
+    TextView tvSortBy;
+    @BindView(R.id.iv_one_col)
+    ImageView ivOneCol;
+    @BindView(R.id.iv_two_col)
+    ImageView ivTwoCol;
     private ProductAdapter adapter;
     private int productQty;
+    private GridLayoutManager layoutManager;
+    private boolean isOneCol = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements ProductDelegate {
 
         if (getSupportActionBar() != null) getSupportActionBar().setTitle(null);
 
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        layoutManager = new GridLayoutManager(getApplicationContext(), 1);
         rvNewIn.setLayoutManager(layoutManager);
         adapter = new ProductAdapter(this);
 
@@ -95,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements ProductDelegate {
                 CKModel.getObjInstance().refreshNewProducts();
             }
         });
+
     }
 
     @Override
@@ -102,6 +114,15 @@ public class MainActivity extends AppCompatActivity implements ProductDelegate {
         super.onStart();
         if (!EventBus.getDefault().isRegistered(this))
             EventBus.getDefault().register(this);
+    }
+
+    @OnClick({R.id.iv_one_col, R.id.iv_two_col})
+    public void sortColumn(View view) {
+        if (view.getId() == R.id.iv_one_col) {
+            layoutManager.setSpanCount(1);
+        } else if (view.getId() == R.id.iv_two_col) {
+            layoutManager.setSpanCount(2);
+        }
     }
 
     @Override
@@ -115,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements ProductDelegate {
     public void onTapProduct(ProductVO productVO) {
         Toast.makeText(getApplicationContext(), "On Tap Product", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplicationContext(), ProductDetailsActivity.class);
-        intent.putExtra(CharlesKeithConstants.PRODUCT_ID , productVO.getProductId());
+        intent.putExtra(CharlesKeithConstants.PRODUCT_ID, productVO.getProductId());
         startActivity(intent);
     }
 
@@ -135,15 +156,15 @@ public class MainActivity extends AppCompatActivity implements ProductDelegate {
         setItemCount(event.getNewProducts().size());
     }
 
-    @Subscribe(threadMode =  ThreadMode.MAIN)
-    public void onFailLoadProducts(ApiErrorEvent event){
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onFailLoadProducts(ApiErrorEvent event) {
         swipeRefreshLayout.setRefreshing(false);
         vpRetry.setVisibility(View.VISIBLE);
         Toast.makeText(getApplicationContext(), event.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     private void setItemCount(int size) {
-        productQty+= size;
+        productQty += size;
         tvItemCount.setText(String.valueOf(productQty).concat(" ").concat(getResources().getString(R.string.dummy_count)));
     }
 }

@@ -62,6 +62,9 @@ public class RetrofitDataAgentImpl implements ProductDataAgent {
                         SuccessLoadNewProductsEvent event = new SuccessLoadNewProductsEvent(newProductResponse.getNewProducts());
                         EventBus.getDefault().post(event);
                     }
+                }else if (newProductResponse != null){
+                    ApiErrorEvent event = new ApiErrorEvent(newProductResponse.getMessage());
+                    EventBus.getDefault().post(event);
                 }
             }
 

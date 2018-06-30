@@ -55,6 +55,7 @@ public class CKModel {
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
     public void onSuccessRefreshGetProducts(SuccessRefreshNewProductsEvent event) {
         setDataIntoRepo(event.getNewProducts());
+        mPage++;
     }
 
     private void setDataIntoRepo(List<ProductVO> newProducts) {

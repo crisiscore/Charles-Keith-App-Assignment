@@ -14,7 +14,7 @@ import xyz.imei.charleskeithapp.adapters.ProductImageAdapter;
 import xyz.imei.charleskeithapp.adapters.RelatedProductAdapter;
 import xyz.imei.charleskeithapp.viewpods.ColoursViewPod;
 
-public class ProductDetailsActivity extends AppCompatActivity {
+public class ProductDetailsActivity extends BaseActivity {
 
 
     @BindView(R.id.toolbar)

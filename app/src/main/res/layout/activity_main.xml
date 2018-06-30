@@ -32,17 +32,6 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <TextView
-            android:id="@+id/tv_item_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/margin_medium"
-            android:fontFamily="monospace"
-            android:typeface="monospace"
-            app:layout_collapseMode="parallax"
-            tools:text="@string/dummy_count" />
-
     </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
@@ -50,13 +39,57 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <ImageView
+            android:id="@+id/iv_one_col"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:contentDescription="@string/new_in"
+            android:src="@drawable/ic_panorama_horizontal_black_24dp" />
+
+        <ImageView
+            android:id="@+id/iv_two_col"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_toEndOf="@+id/iv_one_col"
+            android:contentDescription="@string/new_in"
+            android:src="@drawable/ic_panorama_vertical_black_24dp" />
+
+        <TextView
+            android:id="@+id/tv_sort_by"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/margin_medium_2"
+            android:text="@string/sort_by"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/text_regular_2x" />
+
+        <TextView
+            android:id="@+id/tv_item_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_sort_by"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/margin_medium_2"
+            android:fontFamily="monospace"
+            android:typeface="monospace"
+            app:layout_collapseMode="parallax"
+            tools:text="@string/dummy_count" />
+
+
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_item_count">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_new_in"
+                android:id="@+id/rv_new_in_two_col"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
